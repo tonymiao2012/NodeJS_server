@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+response here: <p id="lblResponse">fill me in</p>
+<script language="JavaScript" type="text/javascript" src="jquery-3.1.1.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            url: 'http://172.16.188.91:3000',
+            data: '{"data": "TEST"}',
+            type: 'POST',
+            success: function (data) {
+                var ret = jQuery.parseJSON(data);
+                $('#lblRespnse').html(ret.msg);
+                console.log('Success: ')
+            },
+            error: function (xhr, status, error) {
+                console.log('Error: ' + error.message);
+                $('#lblResponse').html('Error connecting to the server.');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
