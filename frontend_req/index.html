@@ -6,13 +6,23 @@
 
 </head>
 <body>
-response here: <p id="lblResponse">fill me in</p>
+response here: <p id="lblResponse">Test area</p>
 <script language="JavaScript" type="text/javascript" src="jquery-3.1.1.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+        /*
         $.ajax({
             url: 'http://172.16.188.91:3000',
-            data: '{"data": "TEST"}',
+            data: '{        "key1": "value1",\
+            "key2": "value2",\
+            "key3": "value3",\
+            "key4": "value4",\
+            "key5": [\
+                "a",\
+                "b",\
+                "c",\
+                "d",\
+                "e"]}',
             type: 'POST',
             success: function (data) {
                 var ret = jQuery.parseJSON(data);
@@ -24,7 +34,40 @@ response here: <p id="lblResponse">fill me in</p>
                 $('#lblResponse').html('Error connecting to the server.');
             }
         });
+        */
+        var data = {
+            "key1": "value1",
+            "key2": "value2",
+            "key3": "value3",
+            "key4": "value4",
+            "key5": [
+                "a",
+                "b",
+                "c",
+                "d",
+                "e"
+            ]
+        };
+        var url = 'http://172.16.188.91:3000';
+
+        sendHTTPRequest(url, data);
     });
+
+    function sendHTTPRequest(url, data) {
+        console.log("Data: " + data);
+        console.log("Url: " + url);
+
+        $.post({
+            url: url,
+            data: data
+        })
+            .done(function (ret) {
+                console.log("Success!!");
+            })
+            .failed(function () {
+                console.log("Failed!");
+            });
+    }
 </script>
 
 </body>
